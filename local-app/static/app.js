@@ -1,6 +1,9 @@
 (() => {
+  // Update this value for every presentation or release build.
+  const APP_VERSION = '0.1.0-alpha.2';
   const root = document.querySelector('.studio');
   const $ = (selector) => root.querySelector(selector);
+  $('[data-version]').textContent = `v${APP_VERSION}`;
   const state = { jobId: '', html: '', css: '', history: [], image: null };
   const status = $('[data-status]');
   const refineStatus = $('[data-refine-status]');
