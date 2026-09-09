@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdf2accessible-html"
+version = "0.1.0"
+description = "Convert PDFs to semantic HTML while retaining visual information."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pdfplumber>=0.11,<1",
+  "pypdf>=5,<7",
+  "Pillow>=10,<13",
+  "pypdfium2>=4,<6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1"]
+gemini = ["google-genai>=1,<2"]
+
+[project.scripts]
+pdf2html = "pdf2html.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100

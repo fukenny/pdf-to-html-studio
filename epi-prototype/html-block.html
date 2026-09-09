@@ -1,0 +1,47 @@
+<!-- Paste this into an Epi HTML/WYSIWYG block in source-code mode. -->
+<section class="pdf-converter-mock" aria-labelledby="pdf-converter-title">
+  <header class="pdf-converter-mock__header">
+    <p class="pdf-converter-mock__eyebrow">Publishing tools</p>
+    <h2 id="pdf-converter-title">PDF to HTML Studio</h2>
+    <p>Turn selected PDF pages into reviewable, CMS-safe HTML and CSS.</p>
+  </header>
+
+  <div class="pdf-converter-mock__upload">
+    <div class="pdf-converter-mock__file">
+      <span class="pdf-converter-mock__upload-icon" aria-hidden="true">↑</span>
+      <span><strong>Choose a PDF</strong><small>Drag it here or browse · Maximum 50 MB</small></span>
+    </div>
+    <label class="pdf-converter-mock__field">
+      <span>Pages to convert</span>
+      <input type="text" placeholder="19-20, or leave blank for all pages">
+    </label>
+    <button class="pdf-converter-mock__button" type="button">Convert PDF</button>
+  </div>
+
+  <p class="pdf-converter-mock__status">Ready to convert.</p>
+
+  <div class="pdf-converter-mock__workspace">
+    <article class="pdf-converter-mock__panel">
+      <header><div><span>Source</span><h3>Original PDF</h3></div><b>2 pages</b></header>
+      <div class="pdf-converter-mock__placeholder">
+        <div class="pdf-converter-mock__page"><strong>PAGE 1</strong><span>Sample report overview</span><i></i><i></i><i></i></div>
+        <div class="pdf-converter-mock__page pdf-converter-mock__page--yellow"><strong>PAGE 2</strong><span>Sample infographic</span><i></i><i></i><i></i></div>
+      </div>
+    </article>
+    <article class="pdf-converter-mock__panel">
+      <header><div><span>Result</span><h3>HTML preview</h3></div><div class="pdf-converter-mock__actions"><button type="button">Copy HTML</button><button type="button">Copy CSS</button></div></header>
+      <div class="pdf-converter-mock__result">
+        <p>SAMPLE REPORT · PAGE 1</p>
+        <h3>A <strong>clear HTML</strong> report heading</h3>
+        <div class="pdf-converter-mock__chart"><i></i><i></i><i></i><i></i><i></i></div>
+        <b>Accessible HTML preview appears here</b>
+      </div>
+    </article>
+  </div>
+
+  <div class="pdf-converter-mock__correction">
+    <div><span>Correction pass</span><h3>What should change?</h3><p>Describe the problem in plain language.</p></div>
+    <textarea rows="3" placeholder="Balance the title and line up the chart legend."></textarea>
+    <div class="pdf-converter-mock__actions"><button class="pdf-converter-mock__button" type="button">Apply with Gemini</button><button type="button">Undo</button></div>
+  </div>
+</section>

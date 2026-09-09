@@ -1,0 +1,71 @@
+@model YourSite.Features.PdfToHtml.PdfConverterViewModel
+@{
+    Layout = "~/Views/Shared/Layouts/_Root.cshtml"; // Change this to your site's normal layout.
+}
+<link rel="stylesheet" href="~/pdf-converter/pdf-converter.css" />
+
+<main class="pdf-tool" data-pdf-tool>
+    <header class="pdf-tool__header">
+        <p class="pdf-tool__eyebrow">Internal publishing tool</p>
+        <h1>@(Model.CurrentPage.Heading ?? "PDF to HTML converter")</h1>
+        @if (Model.CurrentPage.Instructions is not null)
+        {
+            <div class="pdf-tool__intro">@Html.PropertyFor(x => x.CurrentPage.Instructions)</div>
+        }
+        else
+        {
+            <p>Upload a PDF, choose pages, review the result, then copy or download the HTML and CSS.</p>
+        }
+    </header>
+
+    <form class="pdf-tool__upload" data-upload-form enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <label class="pdf-tool__drop">
+            <span><strong>Choose a PDF</strong><small>Maximum 50 MB</small></span>
+            <input type="file" name="pdf" accept="application/pdf,.pdf" required data-file />
+        </label>
+        <label class="pdf-tool__field">
+            <span>Pages</span>
+            <input name="pages" placeholder="Example: 19-20 (blank means all pages)" inputmode="numeric" />
+        </label>
+        <button class="pdf-tool__button" type="submit">Convert PDF</button>
+    </form>
+
+    <p class="pdf-tool__status" role="status" aria-live="polite" data-status></p>
+
+    <section class="pdf-tool__workspace" data-workspace hidden>
+        <div class="pdf-tool__panel">
+            <div class="pdf-tool__panel-head"><h2>Original PDF</h2><span data-page-count></span></div>
+            <div class="pdf-tool__source" data-source></div>
+        </div>
+        <div class="pdf-tool__panel">
+            <div class="pdf-tool__panel-head">
+                <h2>HTML preview</h2>
+                <div class="pdf-tool__actions">
+                    <button type="button" class="pdf-tool__button pdf-tool__button--quiet" data-copy-html>Copy HTML</button>
+                    <button type="button" class="pdf-tool__button pdf-tool__button--quiet" data-copy-css>Copy CSS</button>
+                    <a class="pdf-tool__button pdf-tool__button--quiet" data-export>Download ZIP</a>
+                </div>
+            </div>
+            <iframe class="pdf-tool__preview" title="Converted HTML preview" sandbox="allow-same-origin" data-preview></iframe>
+        </div>
+    </section>
+
+    <section class="pdf-tool__refine" data-refine hidden>
+        <h2>Tell it what needs fixing</h2>
+        <p>Example: “Balance the heading, line up the legend, and make both charts start at the same height.”</p>
+        <textarea rows="4" maxlength="4000" data-feedback></textarea>
+        <div class="pdf-tool__actions">
+            <button class="pdf-tool__button" type="button" data-regenerate>Regenerate with Gemini</button>
+            <button class="pdf-tool__button pdf-tool__button--quiet" type="button" data-undo disabled>Undo</button>
+        </div>
+    </section>
+
+    <details class="pdf-tool__code" data-code hidden>
+        <summary>View generated code</summary>
+        <label>HTML<textarea readonly rows="14" data-html></textarea></label>
+        <label>CSS<textarea readonly rows="14" data-css></textarea></label>
+    </details>
+</main>
+
+<script src="~/pdf-converter/pdf-converter.js" defer></script>

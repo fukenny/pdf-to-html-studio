@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PDF to HTML Studio</title>
+  <link rel="stylesheet" href="app.css">
+  <style>.refine-status{min-height:24px;margin:10px 0 0;font-weight:700}.refine-status.is-error{color:#a4262c}.screenshot-picker{display:flex;justify-content:space-between;gap:12px;margin:12px 0;padding:11px 13px;border:1px dashed #8d9bb6;background:#f7f9fc;cursor:pointer}.screenshot-picker small{display:block;color:#53617f}.screenshot-picker input{max-width:190px}.screenshot-preview{display:flex;align-items:end;gap:10px;margin:0 0 12px}.screenshot-preview img{display:block;width:140px;max-height:110px;object-fit:contain;border:1px solid #ccd5e5;background:#fff}</style>
+</head>
+<body>
+  <main class="studio">
+    <header class="studio__header">
+      <div><p class="eyebrow">Publishing tools</p><h1>PDF to HTML Studio</h1></div>
+      <p>Turn selected PDF pages into reviewable, CMS-safe HTML and CSS.</p>
+    </header>
+
+    <form class="upload-card" data-upload>
+      <label class="file-picker">
+        <span class="file-picker__icon" aria-hidden="true">↑</span>
+        <span><strong data-file-label>Choose a PDF</strong><small>Drag it here or browse · Maximum 50 MB</small></span>
+        <input type="file" name="pdf" accept="application/pdf,.pdf" required data-file>
+      </label>
+      <label class="field"><span>Pages to convert</span><input name="pages" placeholder="19-20, or leave blank for all pages"></label>
+      <button class="button" type="submit">Convert PDF</button>
+    </form>
+
+    <div class="progress" data-progress hidden><span></span><p>Reading text and rendering page previews…</p></div>
+    <p class="status" role="status" aria-live="polite" data-status>Select a PDF to begin.</p>
+
+    <section class="workspace" data-workspace hidden>
+      <article class="panel">
+        <header class="panel__header"><div><p class="kicker">Source</p><h2>Original PDF</h2></div><span class="count" data-count></span></header>
+        <div class="source-pages" data-source></div>
+      </article>
+      <article class="panel">
+        <header class="panel__header">
+          <div><p class="kicker">Result</p><h2>HTML preview</h2></div>
+          <div class="actions"><button class="button button--small button--outline" type="button" data-copy-html>Copy HTML</button><button class="button button--small button--outline" type="button" data-copy-css>Copy CSS</button><a class="button button--small button--outline" data-export>ZIP</a></div>
+        </header>
+        <iframe class="preview" title="Generated HTML preview" sandbox="allow-same-origin" data-preview></iframe>
+      </article>
+    </section>
+
+    <section class="editor" data-editor hidden>
+      <div class="editor__feedback">
+        <p class="kicker">Correction pass</p><h2>What should change?</h2>
+        <p>Describe the problem and optionally attach a screenshot of how the code looks after it is applied.</p>
+        <textarea rows="4" data-feedback placeholder="Balance the title and line up the chart legend."></textarea>
+        <label class="screenshot-picker">
+          <span><strong>Add a screenshot</strong><small>PNG, JPEG, or WebP · maximum 5 MB</small></span>
+          <input type="file" accept="image/png,image/jpeg,image/webp" data-feedback-image>
+        </label>
+        <div class="screenshot-preview" data-image-preview hidden>
+          <img alt="Screenshot that will be shared with Gemini" data-image-thumbnail>
+          <button class="button button--small button--outline" type="button" data-remove-image>Remove image</button>
+        </div>
+        <div class="actions"><button class="button" type="button" data-refine>Apply with Gemini</button><button class="button button--outline" type="button" data-undo disabled>Undo</button></div>
+        <p class="refine-status" role="status" aria-live="polite" data-refine-status></p>
+      </div>
+      <div class="code-tabs">
+        <div class="tabs" role="tablist"><button class="is-active" role="tab" data-tab="html">HTML</button><button role="tab" data-tab="css">CSS</button></div>
+        <textarea class="code" spellcheck="false" aria-label="Generated HTML" data-html></textarea>
+        <textarea class="code" spellcheck="false" aria-label="Generated CSS" data-css hidden></textarea>
+        <button class="button button--small" type="button" data-update>Update preview</button>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
